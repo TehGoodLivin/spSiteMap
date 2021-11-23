@@ -22,7 +22,7 @@
 #
 
 # CHANGABLE VARIABLES
-$sitePath = "https://usaf.dps.mil/sites/52msg/CS/SCX/IAO/" # SITE PATH
+$sitePath = "" # SITE PATH
 $reportPath = "C:\users\$env:USERNAME\Desktop\$((Get-Date).ToString("yyyyMMdd_HHmmss"))_SiteMapResults.csv" # REPORT PATH (DEFAULT IS TO DESK
 $results = @() # RESULTS
 
