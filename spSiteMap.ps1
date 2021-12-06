@@ -22,7 +22,7 @@
 #
 
 # CHANGABLE VARIABLES
-$sitePath = "" # SITE PATH
+$sitePath = "https://usaf.dps.mil/sites/52msg/CS/SCX/IAO/" # SITE PATH
 $reportPath = "C:\users\$env:USERNAME\Desktop\$((Get-Date).ToString("yyyyMMdd_HHmmss"))_SiteMapResults.csv" # REPORT PATH (DEFAULT IS TO DESK
 $results = @() # RESULTS
 
@@ -40,13 +40,19 @@ foreach ($list in $subSiteLists) {
 }
 
 # GET PARENT SITE INFO AND LIST COUNT
-$results += New-Object PSObject -Property @{
+$results = New-Object PSObject -Property @{
     Title = $siteInfo.Title
     ItemCount = $siteItemCount
     ListCount = $siteListCount.Count
     ServerRelativeUrl = $siteInfo.ServerRelativeUrl
     Description = $siteInfo.Description
     Created = $siteInfo.Created
+}
+
+if (test-path $reportPath) {
+    $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation -Append
+} else {
+    $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation
 }
 
 foreach ($site in $subSites) {
@@ -62,7 +68,7 @@ foreach ($site in $subSites) {
         $siteItemCount = $siteItemCount + $list.ItemCount
     }
 
-    $results += New-Object PSObject -Property @{
+    $results = New-Object PSObject -Property @{
         Title = $site.Title
         ListCount = $subSiteListCount.Count
         ItemCount = $subSiteItemCount
@@ -70,10 +76,16 @@ foreach ($site in $subSites) {
         Description = $site.Description
         Created = $site.Created
     }
+
+    if (test-path $reportPath) {
+        $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation -Append
+    } else {
+        $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation
+    }
 }
 
 # GET TOTAL COUNTS
-$results += New-Object PSObject -Property @{
+$results = New-Object PSObject -Property @{
     Title = "Total"
     ListCount = $siteListCount.Count
     ItemCount = $siteItemCount
@@ -81,4 +93,9 @@ $results += New-Object PSObject -Property @{
     Description = ""
     Created = ""
 }
-$results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Description", "Created" | Export-Csv -Path $reportPath -NoTypeInformation
+
+if (test-path $reportPath) {
+    $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation -Append
+} else {
+    $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation
+}
