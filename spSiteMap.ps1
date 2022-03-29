@@ -100,4 +100,5 @@ if (test-path $reportPath) {
     $results | Select-Object "Title", "ServerRelativeUrl", "ListCount", "ItemCount", "Created", "Description" | Export-Csv -Path $reportPath -Force -NoTypeInformation
 }
 
+Disconnect-PnPOnline
 Write-Host "$(get-date -format yyyy/MM/dd-HH:mm:ss) - Script Complete" -ForegroundColor Green
