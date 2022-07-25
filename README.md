@@ -24,5 +24,24 @@ SOFTWARE.
 # spSiteMap
 A PowerShell Script designed to map out your Site Collection on SharePoint Online.
 
+## Install PnP PowerShell.
+1.	Open “Windows PowerShell ISE”. You can type this in the windows search bar to find the exact program.
+
+2.	Run the following command: Install-Module -Name PnP.PowerShell -Scope CurrentUser
+
+3.	When prompted: "NuGet provider is required to continue PowerShell Get requires NuGet provider version '2.8.5.201' or newer to interact with NuGet-based repositories. The NuGet provider must be available in 'C:\Program Files\PackageManagement\ProviderAssemblies' or 'C:\Users\EDIPI\AppData\Local\PackageManagement\ProviderAssemblies'. You can also install the NuGet provider by running 'Install-PackageProvider –Name NuGet –Minimum Version 2.8.5.201 -Force'. Do you want PowerShell Get to install and import the NuGet provider now?
+
+[Y] Yes [N] No [S] Suspend [?] Help (default is "Y"):" 
+
+Select Yes (Y).
+
+4.	When prompted: "Untrusted repository you are installing the modules from an untrusted repository. If you trust this repository, change its InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you want to install the modules from 'PSGallery'?
+
+[Y] Yes [A] Yes to All [N] No [L] No to All [S] Suspend [?] Help (default is "N"):" 
+
+Select Yes to All (A).
+
+5.	Verify Installation of PnP PowerShell 1.8.0 or higher: Get-Module PnP.PowerShell* -ListAvailable | Select-Object Name,Version | Sort-Object Version –Descending
+
 ## How To Use
 Within the Script, find the Varible $sitePath = "" and place your site collection link in this location. Let the script run until its completed, and it will print a CVS file to the users desktop.
