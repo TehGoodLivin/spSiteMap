@@ -1,3 +1,8 @@
+# NOTICE
+THIS PROJECT IS NO LONGER BEING UPDATE HERE. PLEASE VISIT THE FOLLOWING LINK FOR ANY UPDATES.
+
+LINK: https://github.com/TheRealGoodLivin/SPOA
+
 # MIT License
 
 Copyright (c) 2021 Austin L
